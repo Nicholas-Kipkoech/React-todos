@@ -18,7 +18,10 @@ export default function App() {
     setTodos((oldList) => [...oldList, todos]);
     setInput(" ");
   };
-  const deleteTodo = () => {};
+  const deleteTodo = (id) => {
+    const newArray = todos.filter((item) => item.id !== id);
+    setTodos(newArray);
+  };
   return (
     <div className="App">
       <div className="container">
@@ -27,7 +30,10 @@ export default function App() {
             {todos.map((item) => {
               return (
                 <ListGroup>
-                  <ListGroup.Item>{item.value}</ListGroup.Item>
+                  <ListGroup.Item key={item.id}>
+                    {item.value}
+                    <button onClick={() => deleteTodo(item.id)}>❌</button>
+                  </ListGroup.Item>
                 </ListGroup>
               );
             })}
